@@ -15,12 +15,13 @@ describe "Creating the tables for a model" do
     end
 
     @klass.create_tables!
-    @schema         = Friendly.db.schema(:stuffs)
-    @table          = Hash[*@schema.map { |s| [s.first, s.last] }.flatten]
-    @index_schema   = Friendly.db.schema(:index_stuffs_on_name_and_created_at)
-    @index_table    = Hash[*@index_schema.map { |s| [s.first, s.last] }.flatten]
-    @id_idx_schema  = Friendly.db.schema(:index_stuffs_on_user_id)
-    @id_index_table = Hash[*@id_idx_schema.map { |s| [s.first, s.last] }.flatten]
+    @schema           = Friendly.db.schema(:stuffs)
+    @unique_id_index  = Friendly.db.indexes(:stuffs)
+    @table            = Hash[*@schema.map { |s| [s.first, s.last] }.flatten]
+    @index_schema     = Friendly.db.schema(:index_stuffs_on_name_and_created_at)
+    @index_table      = Hash[*@index_schema.map { |s| [s.first, s.last] }.flatten]
+    @id_idx_schema    = Friendly.db.schema(:index_stuffs_on_user_id)
+    @id_index_table   = Hash[*@id_idx_schema.map { |s| [s.first, s.last] }.flatten]
   end
 
   after do
@@ -36,6 +37,10 @@ describe "Creating the tables for a model" do
     @table[:attributes][:db_type].should == "text"
     @table[:created_at][:db_type].should == "datetime"
     @table[:updated_at][:db_type].should == "datetime"
+    
+    @unique_id_index.keys.length.should == 1
+    @unique_id_index[:id][:columns].should == [:id]
+    @unique_id_index[:id][:unique].should be_true
   end
 
   it "creates a table for each index" do
