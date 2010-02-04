@@ -26,6 +26,8 @@ module Friendly
           String      :attributes, :text => true
           Time        :created_at
           Time        :updated_at
+          
+          unique      :id
         end
       end
 
