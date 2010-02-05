@@ -4,7 +4,7 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "friendly"
+    gem.name = "arunthampi-friendly"
     gem.summary = %Q{NoSQL with MySQL in Ruby}
     gem.description = %Q{}
     gem.email = "jamesgolick@gmail.com"
