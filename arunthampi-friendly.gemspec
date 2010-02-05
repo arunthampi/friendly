@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
      "Rakefile",
      "TODO.md",
      "VERSION",
+     "arunthampi-friendly.gemspec",
      "examples/friendly.yml",
      "friendly.gemspec",
      "lib/friendly.rb",
